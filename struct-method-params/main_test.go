@@ -87,5 +87,3 @@ func BenchmarkParameterInStructAsPointer(b *testing.B) {
 		n.Calc()
 	}
 }
-
-

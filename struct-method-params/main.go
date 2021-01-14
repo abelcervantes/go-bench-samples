@@ -106,8 +106,9 @@ func (n *NFunc) CalcPointer(mod *Modifier) {
 	n.m = m
 }
 
+var seed = rand.New(rand.NewSource(time.Now().UnixNano()))
+
 func randomSliceOfInt64(len int) []int64 {
-	seed := rand.New(rand.NewSource(time.Now().UnixNano()))
 	s := make([]int64, len)
 	for i := range s {
 		s[i] = seed.Int63()
@@ -116,7 +117,7 @@ func randomSliceOfInt64(len int) []int64 {
 	return s
 }
 
-var l = 3000
+var l = 2000000
 
 func methodParamAsValue() {
 	mod := Modifier{
@@ -201,10 +202,10 @@ func paramInStructAsPointer() {
 }
 
 func main() {
-	defer profile.Start(profile.CPUProfile, profile.ProfilePath("./pprof/method_param_pointer")).Stop()
+	defer profile.Start(profile.CPUProfile, profile.ProfilePath("./pprof/param_in_struct_pointer")).Stop()
 	//defer profile.Start(profile.MemProfile, profile.MemProfileRate(1), profile.ProfilePath("./pprof/method_param_pointer")).Stop()
-	methodParamAsValue()
+	//methodParamAsValue()
 	//methodParamAsPointer()
 	//paramInStructAsValue()
-	//paramInStructAsPointer()
+	paramInStructAsPointer()
 }
